@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 // use App\Helpers\CustomHelpers;
+use App\Events\AddBook;
+
 
 class BookController extends Controller
 {
@@ -40,10 +42,11 @@ class BookController extends Controller
 
             $book = Book::create ([
                 'title'=>$request->title,
-                'description'  => $request->description,
+                'number'  => $request->number,
             ]);
 
             // DB::commit();
+            event(new AddBook($book));
 
             return response()->json([
                 'status' => 'success',

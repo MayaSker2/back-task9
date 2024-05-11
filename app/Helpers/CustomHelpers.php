@@ -1,8 +1,10 @@
 <?php
-namespace App\Helper;
 
-if (! function_exists('formatDate')) {
-    function formatDate($date, $format = 'Y-m-d') {
-        return date($format, strtotime($date));
-    }
+namespace App\Helpers;
+use DateTime;
+
+function formateDate($dateString, $format = 'Y-m-d')
+{
+    $get_date = new DateTime($dateString);
+    return $get_date->format($format);
 }
